@@ -2,6 +2,8 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
+group = "com.github.arjunkcdecoders"
+version = "1.1.0"
 
 android {
     namespace = "com.example.hello_sdk"
