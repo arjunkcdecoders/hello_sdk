@@ -1,14 +1,11 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
 }
-group = "com.github.arjunkcdecoders"
-version = "1.1.0"
 
 android {
     namespace = "com.example.hello_sdk"
     compileSdk {
-        version = release(34)
+        version = release(36)
     }
 
     defaultConfig {
