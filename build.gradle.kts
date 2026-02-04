@@ -1,5 +1,8 @@
 plugins {
-    alias(libs.plugins.android.library)
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+    // 👇 must be declared here (not later)
+    id("maven-publish")
 }
 
 android {
@@ -31,10 +34,27 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.material:material:1.12.0")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+
+/*
+ * ✅ Kotlin-DSL-compatible publishing block
+ * JitPack will automatically run this when building your library.
+ */
+afterEvaluate {
+    extensions.configure<PublishingExtension>("publishing") {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.arjunkcdecoders"
+                artifactId = "hello_sdk"
+                version = "v1.1.0"
+            }
+        }
+    }
 }
